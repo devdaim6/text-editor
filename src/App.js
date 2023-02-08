@@ -3,7 +3,10 @@ import Form from './components/Form';
 import Alert from './components/Alert';
 import { useState } from 'react';
 function App() {
+
   const [alert,setAlert]=useState(null);
+  
+  //alert function
   const showAlert=(type,message)=>{
     setAlert({
       type:type,
