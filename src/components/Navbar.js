@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 export default function Navbar(props){
     return(
            
@@ -42,8 +42,8 @@ export default function Navbar(props){
 
 
 // eslint-disable-next-line react/no-typos
-Navbar.PropTypes={
-  title:PropTypes.string.isRequired
+Navbar.propTypes={
+  title:propTypes.string.isRequired
 };
 
 Navbar.defaultProps={

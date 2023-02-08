@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-export default function Form(){
+export default function Form(props){
    
     const foot ={
         textAlign:"center",
@@ -9,32 +9,37 @@ export default function Form(){
         // console.log("clicked");
         const NewText=text.toUpperCase();
         setInput(NewText);
+        props.showAlert("success","! Converted to UpperCase")
     }
     function textClear(){
         setInput("");
+        props.showAlert("success","! Text Cleared")
     }
     // function countVowels(){
-    //     for(let i=0;i<text.length;i++){
-    //         let count=0;
-    //          if(text.charAt(i)==="a" || text.charAt(i)==="e" || text.charAt(i)==="i" || text.charAt(i)==="o" || text.charAt(i)==="u")
-    //          {
-    //              count++;
-    //          }else return count;
-    //          console.log(count)
-    //      }
-    // }
-    const extraSpaces=()=>{
-        let newText=text.split(/[ ]+/);
-        setInput(newText.join(" "));
-    }
-    const copy=()=>{
-        let clip=document.getElementById("textBox")
-        clip.select();
-        navigator.clipboard.writeText(clip.value);
-    }
-    function handleLowerCase(){
-        const NewText=text.toLowerCase();
-        setInput(NewText);
+        //     for(let i=0;i<text.length;i++){
+            //         let count=0;
+            //          if(text.charAt(i)==="a" || text.charAt(i)==="e" || text.charAt(i)==="i" || text.charAt(i)==="o" || text.charAt(i)==="u")
+            //          {
+                //              count++;
+                //          }else return count;
+                //          console.log(count)
+                //      }
+                // }
+                const extraSpaces=()=>{
+                    let newText=text.split(/[ ]+/);
+                    setInput(newText.join(" "));
+                    props.showAlert("success","! Extra Spaces Has been removed")
+                }
+                const copy=()=>{
+                    let clip=document.getElementById("textBox")
+                    clip.select();
+                    navigator.clipboard.writeText(clip.value);
+                    props.showAlert("success","! Copied to Clipboard Successfully")
+                }
+                function handleLowerCase(){
+                    const NewText=text.toLowerCase();
+                    setInput(NewText);
+                    props.showAlert("success","! Converted to LowerCase")
     }
    
     const changeText=(event)=>{
@@ -65,7 +70,7 @@ return(
     <br />Time Taken To Read : {0.008*text.split(" ").length} Minutes </p>
     
     </div>
-    <div className="border rounded border-dark bg-black text-white  ncontainer">
+    <div className="border rounded border-dark bg-black text-white container">
         <h4 className="text-center">Preview</h4>
 <p >{text}</p>
     </div>
