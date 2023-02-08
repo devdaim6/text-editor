@@ -19,13 +19,10 @@ export default function Form(){
     //          console.log(count)
     //      }
     // }
-    // function textCaps(){
-    //     for(let i=0;i<text.length;i++){
-    //         if(text.split(" ")){
-    //         let a=text.split(" ").length;
-    //   setInput(text.charAt(a))}
-    // }
-    // }
+    const extraSpaces=()=>{
+        let newText=text.split(/[ ]+/);
+        setInput(newText.join(" "));
+    }
     const copy=()=>{
         let clip=document.getElementById("textBox")
         clip.select();
@@ -52,10 +49,10 @@ return(
   <textarea className="form-control border border-dark  " style={myStyle} placeholder="Enter your text here" value={text} onChange={changeText} id="textBox"  col="3" rows="5"></textarea>
 </div>
 <div className="container">
-<button className="btn btn-outline-dark mx-1 my-1" onClick={handleUpperCase}>UpperCase</button>
-<button className="btn btn-outline-dark mx-1 my-1" onClick={handleLowerCase}>LowerCase</button>
-<button className="btn btn-outline-dark mx-1 my-1" onClick={copy}>copy</button>
-{/* <button className="btn btn-outline-dark mx-1 my-1" onClick={textCaps}>Capitalize</button> */}
+<button className="btn btn-outline-dark mx-1 my-1" onClick={handleUpperCase}>Upper Case</button>
+<button className="btn btn-outline-dark mx-1 my-1" onClick={handleLowerCase}>Lower Case</button>
+<button className="btn btn-outline-dark mx-1 my-1" onClick={copy}>Copy</button>
+<button className="btn btn-outline-dark mx-1 my-1" onClick={extraSpaces}>Remove Extra Spaces</button>
 <button className="btn btn-outline-dark mx-1 my-1" onClick={textClear}>Clear</button>
 </div>
 <div className="container my-4">
