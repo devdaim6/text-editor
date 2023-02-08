@@ -1,6 +1,10 @@
 import React,{useState} from "react"
 export default function Form(){
    
+    const foot ={
+        textAlign:"center",
+        margin:"100vw 0 5vw 0"
+    }
     const handleUpperCase =(event)=>{
         // console.log("clicked");
         const NewText=text.toUpperCase();
@@ -65,6 +69,9 @@ return(
         <h4 className="text-center">Preview</h4>
 <p >{text}</p>
     </div>
+    <footer style={foot}>
+    &copy;Copyright | <a href="https://www.devdaim.tech">DevDaim</a>
+  </footer>
 </>
     );
 }
