@@ -3,7 +3,7 @@ export default function Form(){
    
     const foot ={
         textAlign:"center",
-        margin:"80vw 0 5vw 0"
+        margin:"68vw 0 5vw 0"
     }
     const handleUpperCase =(event)=>{
         // console.log("clicked");
