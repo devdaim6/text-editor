@@ -16,8 +16,11 @@ function App() {
   return (
     <>
     <Navbar title=""/>
+    <div className="container">
+
 <Alert alert={alert}/>
-   <div className="container "> <Form showAlert={showAlert}/></div>
+    </div>
+   <div className="container "><Form showAlert={showAlert}/></div>
   
     </>
   );

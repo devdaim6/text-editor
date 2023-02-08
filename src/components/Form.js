@@ -7,14 +7,22 @@ export default function Form(props){
     }
     const handleUpperCase =(event)=>{
         // console.log("clicked");
+        if(text===""){
+            props.showAlert("warning","! Please Enter Some Text To Manipulate")
+        }else{
         const NewText=text.toUpperCase();
         setInput(NewText);
         props.showAlert("success","! Converted to UpperCase")
     }
+}
     function textClear(){
+        if(text===""){
+            props.showAlert("warning","! Please Enter Some Text To Clear")
+        }else{
         setInput("");
         props.showAlert("success","! Text Cleared")
     }
+}
     // function countVowels(){
         //     for(let i=0;i<text.length;i++){
             //         let count=0;
@@ -26,21 +34,33 @@ export default function Form(props){
                 //      }
                 // }
                 const extraSpaces=()=>{
+                    if(text===""){
+                        props.showAlert("warning","! Please Enter Some Text To Manipulate")
+                    }else{
                     let newText=text.split(/[ ]+/);
                     setInput(newText.join(" "));
                     props.showAlert("success","! Extra Spaces Has been removed")
                 }
+            }
                 const copy=()=>{
+                    if(text===""){
+                        props.showAlert("warning","! Please Enter Some Text To Copy it")
+                    }else{
                     let clip=document.getElementById("textBox")
                     clip.select();
                     navigator.clipboard.writeText(clip.value);
                     props.showAlert("success","! Copied to Clipboard Successfully")
                 }
+            }
                 function handleLowerCase(){
+                    if(text===""){
+                        props.showAlert("warning","! Please Enter Some Text To Manipulate")
+                    }else{
                     const NewText=text.toLowerCase();
                     setInput(NewText);
                     props.showAlert("success","! Converted to LowerCase")
     }
+}
    
     const changeText=(event)=>{
         // console.log("yes")
