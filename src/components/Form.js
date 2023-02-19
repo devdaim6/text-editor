@@ -3,7 +3,8 @@ export default function Form(props){
    
     const foot ={
         textAlign:"center",
-        margin:"68vw 0 5vw 0"
+        margin:"68vw 0 5vw 0",
+        textDecoration:"none"
     }
     const handleUpperCase =(event)=>{
         // console.log("clicked");
@@ -66,36 +67,39 @@ export default function Form(props){
         // console.log("yes")
         setInput(event.target.value);
     }
-    const [text,setInput]=useState("");
-    let myStyle={
+    const [text,setInput]=useState('');
+    
+    const myStyle={
         color:"white",
         backgroundColor:"black"
     }
+
 return(
 <>
 <div className="container   mb-3">
  
-  <textarea className="form-control border border-dark  " style={myStyle} placeholder="Enter your text here" value={text} onChange={changeText} id="textBox"  col="3" rows="5"></textarea>
-</div>
-<div className="container">
-<button className="btn btn-outline-dark mx-1 my-1" onClick={handleUpperCase}>Upper Case</button>
-<button className="btn btn-outline-dark mx-1 my-1" onClick={handleLowerCase}>Lower Case</button>
-<button className="btn btn-outline-dark mx-1 my-1" onClick={copy}>Copy</button>
-<button className="btn btn-outline-dark mx-1 my-1" onClick={extraSpaces}>Remove Extra Spaces</button>
-<button className="btn btn-outline-dark mx-1 my-1" onClick={textClear}>Clear</button>
-</div>
+  <textarea className="form-control border border-dark  " style={myStyle} placeholder="Enter your text here" value={text} onChange={changeText} id="textBox"  col="3" rows="3"></textarea>
+
 <div className="container my-4">
-    <h4 className="text-center">Summary</h4>
-    <p>Words : {text.split(" ").length-1} , Characters : {text.length} & Sentences : {text.split(".").length-1}
+    <h4 className="text-center text-white">Summary</h4>
+    <p className="text-white">Words : {text.split(" ").length-1} , Characters : {text.length} & Sentences : {text.split(".").length-1}
     <br />Time Taken To Read : {0.008*text.split(" ").length} Minutes </p>
     
     </div>
     <div className="border rounded border-dark bg-black text-white container">
         <h4 className="text-center">Preview</h4>
-<p >{text}</p>
+        <textarea className="form-control border border-dark my-3 " style={myStyle} placeholder="Read here" value={text} onChange={changeText} id="textBox"  col="3" rows="10"></textarea>
     </div>
-    <footer style={foot}>
-    &copy;Copyright | <a href="https://www.devdaim.tech">DevDaim</a>
+    </div>
+<div className="container">
+<button className="btn btn-outline-secondary text-white mx-1 my-1" onClick={handleUpperCase}>Upper Case</button>
+<button className="btn btn-outline-secondary text-white mx-1 my-1" onClick={handleLowerCase}>Lower Case</button>
+<button className="btn btn-outline-secondary text-white mx-1 my-1" onClick={copy}>Copy</button>
+<button className="btn btn-outline-secondary text-white mx-1 my-1" onClick={extraSpaces}>Remove Extra Spaces</button>
+<button className="btn btn-outline-secondary  text-white mx-1 my-1" onClick={textClear}>Clear</button>
+</div>
+    <footer className="text-white" style={foot}>
+    &copy;Copyright | <a style={foot} href="https://www.devdaim.tech">DevDaim</a>
   </footer>
 </>
     );

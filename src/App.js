@@ -14,11 +14,11 @@ function App() {
     })
     setTimeout(() => {
       setAlert(null); 
-    }, 2000);
+    }, 1500);
   }
   return (
     <>
-    <Navbar title=""/>
+    <Navbar title={"textEdits"}/>
     <div className="container">
 
 <Alert alert={alert}/>
