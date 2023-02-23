@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 export default function Form(props) {
-     
   const [text, setInput] = useState("");
   const [uText, setText] = useState("");
   useEffect(() => {
@@ -10,7 +9,7 @@ export default function Form(props) {
       console.log("Render exitted");
     };
   }, [uText]);
-  
+
   const range = 0.008 * text.split(" ").length - 0.008;
 
   const myStyle = {
@@ -18,11 +17,11 @@ export default function Form(props) {
     backgroundColor: "black",
   };
 
-    const foot = {
+  const foot = {
     textAlign: "center",
     margin: "68vw 0 5vw 0",
     textDecoration: "none",
-    color:"#5af3df"
+    color: "#5af3df",
   };
 
   const changeText = (event) => {
@@ -30,7 +29,7 @@ export default function Form(props) {
     setText(event.target.value);
     setInput(uText);
   };
- 
+
   //fucntion to convert text to UpperCase
   const handleUpperCase = (event) => {
     // console.log("clicked");
@@ -42,8 +41,8 @@ export default function Form(props) {
       props.showAlert("success", "! Converted to UpperCase 🤗");
     }
   };
- 
-   //fucntion to convert text to LowerCase
+
+  //fucntion to convert text to LowerCase
   function handleLowerCase() {
     if (text === "") {
       props.showAlert("warning", "! Please Enter Text To Manipulate 🙄");
@@ -52,9 +51,9 @@ export default function Form(props) {
       setInput(NewText);
       props.showAlert("success", "! Converted to LowerCase 🤗");
     }
-  };
+  }
 
-   //fucntion to copy text to clipboard
+  //fucntion to copy text to clipboard
   const copy = () => {
     if (text === "") {
       props.showAlert("warning", "! Please Enter Text To Copy it 🙄");
@@ -65,24 +64,24 @@ export default function Form(props) {
       props.showAlert("success", "! Copied to Clipboard Successfully 🤗");
     }
   };
-  
-   //fucntion to Capitalize text  
+
+  //fucntion to Capitalize text
   function capitalize() {
     if (text === "") {
-        props.showAlert("warning", "! Please Enter Text To Capitalize it 🙄");
+      props.showAlert("warning", "! Please Enter Text To Capitalize it 🙄");
     } else {
-        const arr = text.split(" ");
-        
-        for (var i = 0; i < arr.length; i++) {
-            arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-        }
-        const str = arr.join(" ");
-        setInput(str);
-        props.showAlert("success","! Capitalized successfully 🤗");
-}
-};
+      const arr = text.split(" ");
 
- //fucntion to remove Extra Spaces
+      for (var i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+      }
+      const str = arr.join(" ");
+      setInput(str);
+      props.showAlert("success", "! Capitalized successfully 🤗");
+    }
+  }
+
+  //fucntion to remove Extra Spaces
   const extraSpaces = () => {
     if (text === "") {
       props.showAlert("warning", "! Please Enter Text To Manipulate 🙄");
@@ -94,9 +93,9 @@ export default function Form(props) {
     if (text.split(/[ ]+/).length === 2) {
       props.showAlert("warning", "! No Extra Space to be Removed");
     }
-  }; 
+  };
 
-   //fucntion to clear the text
+  //fucntion to clear the text
   function textClear() {
     if (text === "") {
       props.showAlert("warning", "! Please Enter Text To Clear 🙄");
@@ -105,9 +104,7 @@ export default function Form(props) {
       setText("");
       props.showAlert("success", "! Text Cleared 🤗");
     }
-  };
- 
-  
+  }
 
   // function countVowels(){
   //     for(let i=0;i<text.length;i++){
@@ -119,7 +116,6 @@ export default function Form(props) {
   //          console.log(count)
   //      }
   // }
-
 
   return (
     <>

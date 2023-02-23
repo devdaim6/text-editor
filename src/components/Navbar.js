@@ -1,21 +1,31 @@
-import React from 'react'
-import propTypes from 'prop-types';
-export default function Navbar(props){
-    return(
-           
-      <nav className="navbar navbar-dark bg-black navbar-expand-lg navbar-expand-md navbar-expand bg-opacity-25" aria-label="First navbar example">
+import React from "react";
+import propTypes from "prop-types";
+export default function Navbar(props) {
+  return (
+    <nav
+      className="navbar navbar-dark bg-black navbar-expand-lg navbar-expand-md navbar-expand bg-opacity-25"
+      aria-label="First navbar example"
+    >
       <div className="container-fluid">
-        <a className="navbar-brand" href="/"><em>{props.title}</em> </a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+        <a className="navbar-brand" href="/">
+          <em>{props.title}</em>{" "}
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarsExample01"
+          aria-controls="navbarsExample01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
-  
+
         <div className="collapse navbar-collapse" id="navbarsExample01">
           <ul className="navbar-nav me-auto mb-2">
-            <li className="nav-item">
-            </li>
-            <li className="nav-item">
-            </li>
+            <li className="nav-item"></li>
+            <li className="nav-item"></li>
             {/* <li className="nav-item">
               <a className="nav-link" href="/">Contact</a>
             </li> */}
@@ -29,25 +39,27 @@ export default function Navbar(props){
             </li> */}
           </ul>
           <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
-  <label class="form-check-label text-white" for="flexSwitchCheckDefault">Enable Light Mode</label>
-</div>
-          {/* <form role="search">
-            <input className="form-control-sm" type="search" placeholder="Search" aria-label="Search"/>
-          </form> */}
+            <input
+              class="form-check-input "
+              type="checkbox"
+              role="switch"
+              id="darkmode"
+            />
+            <label class="form-check-label text-white " htmlFor="darkmode">
+              Enable Light Mode
+            </label>
+          </div>
         </div>
       </div>
     </nav>
-      
-    );
+  );
 }
 
-
 // eslint-disable-next-line react/no-typos
-Navbar.propTypes={
-  title:propTypes.string.isRequired
+Navbar.propTypes = {
+  title: propTypes.string.isRequired,
 };
 
-Navbar.defaultProps={
-  title:"DevDaim"
+Navbar.defaultProps = {
+  title: "DevDaim",
 };
