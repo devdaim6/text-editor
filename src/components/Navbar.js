@@ -28,6 +28,10 @@ export default function Navbar(props){
               </ul>
             </li> */}
           </ul>
+          <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+  <label class="form-check-label text-white" for="flexSwitchCheckDefault">Enable Light Mode</label>
+</div>
           {/* <form role="search">
             <input className="form-control-sm" type="search" placeholder="Search" aria-label="Search"/>
           </form> */}
