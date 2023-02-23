@@ -1,14 +1,38 @@
-import React from "react";
+import React,{useState} from "react";
 import propTypes from "prop-types";
+
 export default function Navbar(props) {
+  const [mode,setMode]=useState('black');
+  const [modeText,setModeText]=useState('Light');
+  const [text,setText]=useState();
+  const updateMode=()=>{
+// console.log("hi")
+if(mode==="black")
+setMode('white');
+else
+setMode("black")
+if(mode==="black")
+setModeText('Dark')
+else
+setModeText("Light")
+if(mode==="black")
+setText('black');
+else
+setText('white')
+}
+
+
+
   return (
+    <div className={`bg-${mode}`}>
     <nav
-      className="navbar navbar-dark bg-black navbar-expand-lg navbar-expand-md navbar-expand bg-opacity-25"
+      className={`navbar navbar-dark bg-${mode} navbar-expand-lg navbar-expand-md navbar-expand bg-opacity-25 `}
       aria-label="First navbar example"
     >
-      <div className="container-fluid">
-        <a className="navbar-brand" href="/">
-          <em>{props.title}</em>{" "}
+     
+      <div className={`container-fluid  `}>
+        <a className={`navbar-brand  `} href="/">
+          <em className={`text-${text}`}>{props.title}</em> 
         </a>
         <button
           className="navbar-toggler"
@@ -38,20 +62,22 @@ export default function Navbar(props) {
               </ul>
             </li> */}
           </ul>
-          <div class="form-check form-switch">
+          <div class="form-check form-switch"   >
             <input
-              class="form-check-input "
+          onChange={updateMode}
+              class="form-check-input"
               type="checkbox"
               role="switch"
               id="darkmode"
             />
-            <label class="form-check-label text-white " htmlFor="darkmode">
-              Enable Light Mode
+            <label class={`form-check-label` } htmlFor="darkmode">
+              Enable {modeText} Mode
             </label>
           </div>
         </div>
       </div>
     </nav>
+    </div>
   );
 }
 

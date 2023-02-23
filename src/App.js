@@ -15,14 +15,15 @@ function App() {
       setAlert(null);
     }, 1500);
   };
+
   return (
     <>
-      <Navbar title={"textEdits"} />
+      <Navbar title={"textEdits"} theme="white"/>
       <div className="container">
         <Alert alert={alert} />
       </div>
       <div className="container ">
-        <Form showAlert={showAlert} />
+        <Form showAlert={showAlert}  />
       </div>
     </>
   );
