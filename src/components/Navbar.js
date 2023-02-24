@@ -1,38 +1,67 @@
-import React,{useState} from "react";
+import React,{ useState} from "react";
 import propTypes from "prop-types";
-
+import Form from "./Form";
+import Alert from "./Alert";
 export default function Navbar(props) {
-  const [mode,setMode]=useState('black');
-  const [modeText,setModeText]=useState('Light');
-  const [text,setText]=useState();
+  const [mode,setMode]=useState('white');
+  const [modeText,setModeText]=useState('');
+  const [navText,setNavText]=useState("Dark");
+const [bg,setBg]=useState("");
   const updateMode=()=>{
+  
+    if(document.getElementById('darkmode').checked===false )
+    {
+      document.getElementById("root").style.background = "white"
+    }
+    else{
+      document.getElementById("root").style.background = "#000000"
+    }
+ 
 // console.log("hi")
-if(mode==="black")
-setMode('white');
-else
-setMode("black")
-if(mode==="black")
-setModeText('Dark')
-else
-setModeText("Light")
-if(mode==="black")
-setText('black');
-else
-setText('white')
+if(mode==="black"){
+  setMode('white');
+}
+else{
+  setMode("black")
 }
 
+if(mode==="black"){
+  setModeText('dark')
+  setBg("light")
+  setNavText('Dark')
+}
+else{
+  setModeText("light")
+  setBg("dark")
+  setNavText('Light')
+}
+}
+
+const [alert, setAlert] = useState(null);
+
+//alert function
+const showAlert = (type, message) => {
+  setAlert({
+    type: type,
+    msg: message,
+  });
+  setTimeout(() => {
+    setAlert(null);
+  }, 1500);
+};
 
 
   return (
-    <div className={`bg-${mode}`}>
+    <>
+    
     <nav
-      className={`navbar navbar-dark bg-${mode} navbar-expand-lg navbar-expand-md navbar-expand bg-opacity-25 `}
+      className={`navbar bg-dark bg-${modeText}  navbar-expand bg-opacity-50`}
       aria-label="First navbar example"
     >
      
       <div className={`container-fluid  `}>
         <a className={`navbar-brand  `} href="/">
-          <em className={`text-${text}`}>{props.title}</em> 
+          <em className={`text-${modeText}`}>{props.title}</em> 
         </a>
         <button
           className="navbar-toggler"
@@ -62,7 +91,7 @@ setText('white')
               </ul>
             </li> */}
           </ul>
-          <div class="form-check form-switch"   >
+          <div className="form-check form-switch"   >
             <input
           onChange={updateMode}
               class="form-check-input"
@@ -70,14 +99,21 @@ setText('white')
               role="switch"
               id="darkmode"
             />
-            <label class={`form-check-label` } htmlFor="darkmode">
-              Enable {modeText} Mode
+            <label className={`form-check-label text-${modeText}  ` } htmlFor="darkmode">
+              Enable {navText} Mode
             </label>
           </div>
         </div>
       </div>
     </nav>
-    </div>
+ 
+    <div className="container">
+        <Alert alert={alert} />
+      </div>
+       <div className="container ">
+       <Form showAlert={showAlert} theme={modeText} bg={bg} textMode={modeText} />
+     </div>
+     </>
   );
 }
 
