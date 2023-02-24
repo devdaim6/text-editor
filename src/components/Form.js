@@ -13,8 +13,8 @@ export default function Form(props) {
   }, [uText]);
   
  
-  let count = text.split(" ").length - 1;
-  const range = text.split(" ").length/180;
+  let count = uText.split(" ").length - 1;
+  const range = uText.split(" ").length/180-0.0055555555555555556;
 
 
 
@@ -48,10 +48,10 @@ export default function Form(props) {
   const handleUpperCase = (event) => {
 
     // console.log("clicked");
-    if (text === "") {
+    if (uText === "") {
       props.showAlert("warning", "! Please Enter Text To Manipulate 🙄");
     } else {
-      const NewText = text.toUpperCase();
+      const NewText = uText.toUpperCase();
       setInput(NewText);
       props.showAlert("success", "! Converted to UpperCase 🤗");
     }
@@ -59,10 +59,10 @@ export default function Form(props) {
 
   //fucntion to convert text to LowerCase
   function handleLowerCase() {
-    if (text === "") {
+    if (uText === "") {
       props.showAlert("warning", "! Please Enter Text To Manipulate 🙄");
     } else {
-      const NewText = text.toLowerCase();
+      const NewText = uText.toLowerCase();
       setInput(NewText);
       props.showAlert("success", "! Converted to LowerCase 🤗");
     }
@@ -70,7 +70,7 @@ export default function Form(props) {
 
   //fucntion to copy text to clipboard
   const copy = () => {
-    if (text === "") {
+    if (uText === "") {
       props.showAlert("warning", "! Please Enter Text To Copy it 🙄");
     } else {
       let clip = document.getElementById("textBox");
@@ -82,10 +82,10 @@ export default function Form(props) {
 
   //fucntion to Capitalize text
   function capitalize() {
-    if (text === "") {
+    if (uText === "") {
       props.showAlert("warning", "! Please Enter Text To Capitalize it 🙄");
     } else {
-      const arr = text.split(" ");
+      const arr = uText.split(" ");
 
       for (var i = 0; i < arr.length; i++) {
         arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
@@ -98,14 +98,14 @@ export default function Form(props) {
 
   //fucntion to remove Extra Spaces
   const extraSpaces = () => {
-    if (text === "") {
+    if (uText === "") {
       props.showAlert("warning", "! Please Enter Text To Manipulate 🙄");
     } else {
-      let newText = text.split(/[ ]+/);
+      let newText = uText.split(/[ ]+/);
       setInput(newText.join(" "));
       props.showAlert("success", "! Extra Spaces Has been removed 🤗");
     }
-    if (text.split(/[ ]+/).length === 2) {
+    if (uText.split(/[ ]+/).length === 2) {
       props.showAlert("warning", "! No Extra Space to be Removed");
     }
   };
@@ -151,11 +151,11 @@ export default function Form(props) {
 
           <p className={`text-${props.textMode}`}>
             Words : {count} <br />
-            Characters : {text.length} <br />
-            Sentences : {text.split(".").length - 1}
+            Characters : {uText.length} <br />
+            Sentences : {uText.split(".").length - 1}
             {/* Vowels : {vowelsRef} */}
             <br />
-            Time Taken To Read : {range} Minutes{" "}
+            Time Taken To Read : {range.toFixed(2)} Minutes{" "}
           </p>
         </div>
         <hr />
