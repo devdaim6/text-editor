@@ -1,0 +1,8 @@
+.form-control::placeholder {
+    color: #acaaaa;
+    opacity: 1;
+  }
+  .btn{
+font-size: .4rem;
+font-weight:500;
+  }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./App.css"
+import "./Form.css"
 export default function Form(props) {
   const [text, setInput] = useState("");
   const [uText, setText] = useState("");
@@ -14,7 +14,7 @@ export default function Form(props) {
   
  
   let count = uText.split(" ").length - 1;
-  const range = uText.split(" ").length/180-0.0055555555555555556;
+  const range = uText.split(" ").length/100-0.0055555555555555556;
 
 
 
@@ -26,11 +26,7 @@ export default function Form(props) {
     color: "#5af3df",
   };
  
- 
-    
-   
- 
-
+  
   const foot1 = {
 
     margin: "68vw 0 5vw 0",
@@ -134,17 +130,17 @@ export default function Form(props) {
   return (
     <>
 
-      <div className={`container   mb-3`}>
+      <div className={`container mb-1`}>
         <textarea
           className={`form-control bg-${props.bg} border border-${props.textMode} text-${props.textMode} border-${props.textMode}  my-3`}
-          
           placeholder="Enter your text here"
           value={uText}
           onChange={changeText}
           id="textBox2"
           col="1"
           rows="7"
-        ></textarea>
+        >
+        </textarea>
 
         <div className="container my-4">
           <h4 className={`text-center  border-${props.textMode} text-${props.textMode}`}>Summary<hr /></h4>
@@ -162,8 +158,7 @@ export default function Form(props) {
         <div className={`   container`}>
           <h4 className={`text-center text-${props.textMode} `}>Preview  </h4>
           <textarea
-            className={`form-control bg-${props.bg} border border-${props.textMode} text-${props.textMode} border-${props.textMode} my-3`}
-
+            className={`input form-control bg-${props.bg} border border-${props.textMode} text-${props.textMode} border-${props.textMode} my-3`}
             readOnly
             placeholder="Read here"
             value={text}
@@ -179,37 +174,46 @@ export default function Form(props) {
           className={`btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
           onClick={handleUpperCase}
         >
+          <small>
           Upper Case
+          </small>
         </button>
         <button
           className={`btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={handleLowerCase}
-        >
+        ><small>
           Lower Case
+        </small>
         </button>
         <button
-          className={`btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
+          className={`btn text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={copy}
-        >
+        ><small>
           Copy
+        </small>
         </button>
         <button
           className={`btn  text-${props.textMode}  btn-outline-secondary mx-1 my-1`}
           onClick={capitalize}
         >
+          <small>
           Capitalize
+          </small>
         </button>
         <button
           className={`btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={extraSpaces}
         >
+          <small>
           Remove Extra Spaces
+          </small>
         </button>
         <button
           className={`btn text-${props.textMode} btn-outline-secondary  mx-1 my-1`}
           onClick={textClear}
-        >
+        ><small>
           Clear
+        </small>
         </button>
       </div>
       <footer className={`text-${props.textMode} text-center`} style={foot1} >
