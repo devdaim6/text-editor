@@ -1,48 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Form.css"
 export default function Form(props) {
+  //USeState Hooks
   const [text, setInput] = useState("");
   const [uText, setText] = useState("");
-   
-  useEffect(() => {
-    setText(uText);
-    
-    return () => {
-      // console.log(uText)
-    };
-  }, [uText]);
-  
- 
+
+  //Variables
   let count = uText.split(" ").length - 1;
-  const range = uText.split(" ").length/100-0.0055555555555555556;
+  const range = (uText.split(" ").length / 110) - 0.0055555555555555556;
 
-
-
-
+  //Css
   const foot = {
 
     margin: "68vw 0 5vw 0",
     textDecoration: "none",
     color: "#5af3df",
   };
- 
-  
+
   const foot1 = {
 
     margin: "68vw 0 5vw 0",
 
   };
- const changeText = (event) => {
-    // console.log("yes")
+
+  const changeText = (event) => {
+
     setText(event.target.value);
     setInput(uText);
-  // countVowels(...vowelsRef);
 
   };
 
   //fucntion to convert text to UpperCase
   const handleUpperCase = (event) => {
-
     // console.log("clicked");
     if (uText === "") {
       props.showAlert("warning", "! Please Enter Text To Manipulate 🙄");
@@ -117,16 +106,6 @@ export default function Form(props) {
     }
   };
 
-/*   function countVowels(...vowelsRef){
-      for(let i=0;i<uText.length;i++){
-           if(uText.charCodeAt(i)===97 || uText.charAt(i)===101 || uText.charCodeAt(i)===105 || uText.charCodeAt(i)===111 || uText.charCodeAt(i)===117 || uText.charCodeAt(i)===65 || uText.charCodeAt(i)===69 || uText.charCodeAt(i)===73 || uText.charCodeAt(i)===79 || uText.charCodeAt(i)===85)
-            {
-               vowelsRef++;
-                console.log(vowelsRef)
-            } 
-       }
-  }  */
-
   return (
     <>
 
@@ -175,29 +154,29 @@ export default function Form(props) {
           onClick={handleUpperCase}
         >
           <small>
-          Upper Case
+            Upper Case
           </small>
         </button>
         <button
           className={`btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={handleLowerCase}
         ><small>
-          Lower Case
-        </small>
+            Lower Case
+          </small>
         </button>
         <button
           className={`btn text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={copy}
         ><small>
-          Copy
-        </small>
+            Copy
+          </small>
         </button>
         <button
           className={`btn  text-${props.textMode}  btn-outline-secondary mx-1 my-1`}
           onClick={capitalize}
         >
           <small>
-          Capitalize
+            Capitalize
           </small>
         </button>
         <button
@@ -205,15 +184,15 @@ export default function Form(props) {
           onClick={extraSpaces}
         >
           <small>
-          Remove Extra Spaces
+            Remove Extra Spaces
           </small>
         </button>
         <button
           className={`btn text-${props.textMode} btn-outline-secondary  mx-1 my-1`}
           onClick={textClear}
         ><small>
-          Clear
-        </small>
+            Clear
+          </small>
         </button>
       </div>
       <footer className={`text-${props.textMode} text-center`} style={foot1} >
