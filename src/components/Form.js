@@ -6,7 +6,7 @@ export default function Form(props) {
   const [uText, setText] = useState("");
 
   //Variables
-  let count = (text.split(" ").length - 1); // + (uText.split(".").length - 1)
+  let count = (uText.split(" ").length - 1); // + (uText.split(".").length - 1)
   const range = (uText.split(" ").length / 110) - 0.0055555555555555556;
 
   //Css
