@@ -4,7 +4,7 @@ import Form from "./Form";
 import Alert from "./Alert";
 export default function Navbar(props) {
   const [mode, setMode] = useState('white');
-  const [modeText, setModeText] = useState('');
+  const [modeText, setModeText] = useState('dark');
   const [navText, setNavText] = useState("Dark");
   const [bg, setBg] = useState("");
   const [alert, setAlert] = useState(null);

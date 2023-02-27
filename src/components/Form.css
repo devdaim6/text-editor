@@ -3,6 +3,9 @@
     opacity: 1;
   }
   .btn{
-font-size: .4rem;
+font-size: .7rem;
 font-weight:500;
+  }
+  .button:hover{
+    text-emphasis-color: white;
   }

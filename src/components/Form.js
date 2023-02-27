@@ -6,7 +6,7 @@ export default function Form(props) {
   const [uText, setText] = useState("");
 
   //Variables
-  let count = uText.split(" ").length - 1;
+  let count = (text.split(" ").length - 1); // + (uText.split(".").length - 1)
   const range = (uText.split(" ").length / 110) - 0.0055555555555555556;
 
   //Css
@@ -122,7 +122,8 @@ export default function Form(props) {
         </textarea>
 
         <div className="container my-4">
-          <h4 className={`text-center  border-${props.textMode} text-${props.textMode}`}>Summary<hr /></h4>
+          <h4 className={`text-center  border-${props.textMode} text-${props.textMode}`}>Summary </h4>
+          <hr className={`border rounded border-${props.textMode}`} />
 
           <p className={`text-${props.textMode}`}>
             Words : {count} <br />
@@ -133,7 +134,7 @@ export default function Form(props) {
             Time Taken To Read : {range.toFixed(2)} Minutes{" "}
           </p>
         </div>
-        <hr />
+        <hr className={`border rounded border-${props.textMode}`} />
         <div className={`   container`}>
           <h4 className={`text-center text-${props.textMode} `}>Preview  </h4>
           <textarea
@@ -150,7 +151,7 @@ export default function Form(props) {
       </div>
       <div className="container">
         <button
-          className={`btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
+          className={`button btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
           onClick={handleUpperCase}
         >
           <small>
@@ -158,29 +159,29 @@ export default function Form(props) {
           </small>
         </button>
         <button
-          className={`btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
+          className={`button btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={handleLowerCase}
         ><small>
             Lower Case
           </small>
         </button>
         <button
-          className={`btn text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
+          className={`button btn text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={copy}
         ><small>
             Copy
           </small>
         </button>
         <button
-          className={`btn  text-${props.textMode}  btn-outline-secondary mx-1 my-1`}
+          className={`button btn text-${props.textMode}  btn-outline-secondary mx-1 my-1`}
           onClick={capitalize}
         >
-          <small>
+          <small className="t">
             Capitalize
           </small>
         </button>
         <button
-          className={`btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
+          className={`button btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={extraSpaces}
         >
           <small>
@@ -188,7 +189,7 @@ export default function Form(props) {
           </small>
         </button>
         <button
-          className={`btn text-${props.textMode} btn-outline-secondary  mx-1 my-1`}
+          className={`button btn text-${props.textMode} btn-outline-secondary  mx-1 my-1`}
           onClick={textClear}
         ><small>
             Clear
