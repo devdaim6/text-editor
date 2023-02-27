@@ -116,6 +116,7 @@ export default function Form(props) {
           value={uText}
           onChange={changeText}
           id="textBox2"
+          autoFocus
           col="1"
           rows="7"
         >
