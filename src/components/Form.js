@@ -4,6 +4,7 @@ export default function Form(props) {
   //USeState Hooks
   const [text, setInput] = useState("");
   const [uText, setText] = useState("");
+  // const [listen, setListen] = useState(null);
 
   //Variables
   let count = (uText.split(" ").length - 1); // + (uText.split(".").length - 1)
@@ -26,7 +27,7 @@ export default function Form(props) {
   const changeText = (event) => {
 
     setText(event.target.value);
-    setInput(uText);
+    setInput(event.target.value);
 
   };
 
@@ -53,6 +54,40 @@ export default function Form(props) {
     }
   }
 
+  //function to correct spell
+  async function handleSpell() {
+    if (uText === "") {
+      props.showAlert("warning", "! Please Enter Text To Check 🙄");
+      return;
+    }
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'X-RapidAPI-Key': '632a1d3569mshf3161e9d8d7f486p1c0d34jsne6615e4c4573',
+        'X-RapidAPI-Host': 'openai80.p.rapidapi.com'
+      },
+      body: `{"model":"text-davinci-edit-001","input":"${uText}","instruction":"Fix the spelling mistakes"}`
+    };
+
+    const res = await fetch('https://openai80.p.rapidapi.com/edits', options);
+    const resJson = await res.json();
+    setInput(resJson.choices[0].text)
+    props.showAlert("success", "! Spelling Corrected 🤗");
+
+  }
+
+  //fucntion to download speech of text
+  const text2Speech = async () => {
+    if (uText === "") {
+      props.showAlert("warning", "! Please Enter Text To Hear it 🙄");
+    } else {
+      const res = await fetch(`https://text2speech3.p.rapidapi.com/tts?text=${uText}&rapidapi-key=632a1d3569mshf3161e9d8d7f486p1c0d34jsne6615e4c4573`) /*&slow=${slow}&lang=${lang}*/
+      console.log(res.url)
+      // setListen(res.url);
+      props.showAlert("success", "! Downloaded Successfully 🤗");
+    }
+  };
   //fucntion to copy text to clipboard
   const copy = () => {
     if (uText === "") {
@@ -78,6 +113,28 @@ export default function Form(props) {
       const str = arr.join(" ");
       setInput(str);
       props.showAlert("success", "! Capitalized successfully 🤗");
+    }
+  }
+
+  //fucntion to Capitalize text
+  async function punctuation() {
+    if (uText === "") {
+      props.showAlert("warning", "! Please Enter Text To Capitalize it 🙄");
+    } else {
+      const options = {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'X-RapidAPI-Key': '632a1d3569mshf3161e9d8d7f486p1c0d34jsne6615e4c4573',
+          'X-RapidAPI-Host': 'openai80.p.rapidapi.com'
+        },
+        body: `{"model":"text-davinci-edit-001","input":"${uText}","instruction":"Correct the punctuation mistakes"}`
+      };
+
+      const res = await fetch('https://openai80.p.rapidapi.com/edits', options);
+      const resJson = await res.json();
+      setInput(resJson.choices[0].text)
+      props.showAlert("success", "! Punctuation Mistakes Fixed 🤗");
     }
   }
 
@@ -109,6 +166,7 @@ export default function Form(props) {
   return (
     <>
 
+
       <div className={`container mb-1`}>
         <textarea
           className={`form-control bg-${props.bg} border border-${props.textMode} text-${props.textMode} border-${props.textMode}  my-3`}
@@ -121,7 +179,6 @@ export default function Form(props) {
           rows="7"
         >
         </textarea>
-
         <div className="container my-4">
           <h4 className={`text-center  border-${props.textMode} text-${props.textMode}`}>Summary </h4>
           <hr className={`border rounded border-${props.textMode}`} />
@@ -160,6 +217,14 @@ export default function Form(props) {
           </small>
         </button>
         <button
+          className={`button btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
+          onClick={handleSpell}
+        >
+          <small>
+            SpellChecker
+          </small>
+        </button>
+        <button
           className={`button btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={handleLowerCase}
         ><small>
@@ -167,10 +232,24 @@ export default function Form(props) {
           </small>
         </button>
         <button
+          className={`button btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
+          onClick={punctuation}
+        ><small>
+            Punctuation
+          </small>
+        </button>
+        <button
           className={`button btn text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={copy}
         ><small>
             Copy
+          </small>
+        </button>
+        <button
+          className={`button btn text-${props.textMode}   btn-outline-secondary mx-1 my-1`} disabled
+          onClick={text2Speech}
+        ><small>
+            Download Speech
           </small>
         </button>
         <button
@@ -196,6 +275,7 @@ export default function Form(props) {
             Clear
           </small>
         </button>
+        {/* <iframe src={`${listen}`} style={{ visibility: "hidden" }}></iframe> */}
       </div>
       <footer className={`text-${props.textMode} text-center`} style={foot1} >
         &copy;Copyright |{" "}
