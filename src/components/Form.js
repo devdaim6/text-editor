@@ -5,6 +5,8 @@ export default function Form(props) {
   const [text, setInput] = useState("");
   const [uText, setText] = useState("");
   // const [listen, setListen] = useState(null);
+  const [bold, setBold] = useState("normal");
+  const [italic, setItalic] = useState("normal");
 
   //Variables
   let count = (uText.split(" ").length - 1); // + (uText.split(".").length - 1)
@@ -116,7 +118,7 @@ export default function Form(props) {
     }
   }
 
-  //fucntion to Capitalize text
+  //fucntion to Punctuate text
   async function punctuation() {
     if (uText === "") {
       props.showAlert("warning", "! Please Enter Text To Capitalize it 🙄");
@@ -162,11 +164,35 @@ export default function Form(props) {
       props.showAlert("success", "! Text Cleared 🤗");
     }
   };
+  //fucntion to bold the text
+  function handleBold() {
+    if (text === "") {
+      props.showAlert("warning", "! Please Enter Text To Make it Bold 🙄");
+    } else {
+      if (bold === "normal") {
+        setBold("bold")
+        props.showAlert("success", "! Text Bold");
+      } else {
+        setBold("normal")
+      }
+    }
+  };
+  //fucntion to Italicise the text
+  function handleItalic() {
+    if (text === "") {
+      props.showAlert("warning", "! Please Enter Text To Italicise 🙄");
+    } else {
+      if (italic === "normal") {
+        setItalic("italic")
+        props.showAlert("success", "! Text Italicised");
+      } else {
+        setItalic("normal")
+      }
+    }
+  };
 
   return (
     <>
-
-
       <div className={`container mb-1`}>
         <textarea
           className={`form-control bg-${props.bg} border border-${props.textMode} text-${props.textMode} border-${props.textMode}  my-3`}
@@ -179,6 +205,7 @@ export default function Form(props) {
           rows="7"
         >
         </textarea>
+
         <div className="container my-4">
           <h4 className={`text-center  border-${props.textMode} text-${props.textMode}`}>Summary </h4>
           <hr className={`border rounded border-${props.textMode}`} />
@@ -192,7 +219,9 @@ export default function Form(props) {
             Time Taken To Read : {range.toFixed(2)} Minutes{" "}
           </p>
         </div>
-        <hr className={`border rounded border-${props.textMode}`} />
+
+         <hr className={`border rounded border-${props.textMode}`} />
+
         <div className={`   container`}>
           <h4 className={`text-center text-${props.textMode} `}>Preview  </h4>
           <textarea
@@ -204,9 +233,12 @@ export default function Form(props) {
             id="textBox"
             col="1"
             rows="8"
+            style={{ fontWeight: `${bold}`, fontStyle: `${italic}` }}
           ></textarea>
         </div>
+
       </div>
+
       <div className="container">
         <button
           className={`button btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
@@ -216,6 +248,15 @@ export default function Form(props) {
             Upper Case
           </small>
         </button>
+
+        <button
+          className={`button btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
+          onClick={handleLowerCase}
+        ><small>
+            Lower Case
+          </small>
+        </button>
+
         <button
           className={`button btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
           onClick={handleSpell}
@@ -224,13 +265,25 @@ export default function Form(props) {
             SpellChecker
           </small>
         </button>
+
         <button
-          className={`button btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
-          onClick={handleLowerCase}
-        ><small>
-            Lower Case
+          className={`button btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
+          onClick={handleBold}
+        >
+          <small>
+            Bold
           </small>
         </button>
+
+        <button
+          className={`button btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
+          onClick={handleItalic}
+        >
+          <small>
+            Italic
+          </small>
+        </button>
+
         <button
           className={`button btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={punctuation}
@@ -238,6 +291,7 @@ export default function Form(props) {
             Punctuation
           </small>
         </button>
+
         <button
           className={`button btn text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={copy}
@@ -245,6 +299,7 @@ export default function Form(props) {
             Copy
           </small>
         </button>
+
         <button
           className={`button btn text-${props.textMode}   btn-outline-secondary mx-1 my-1`} disabled
           onClick={text2Speech}
@@ -252,6 +307,7 @@ export default function Form(props) {
             Download Speech
           </small>
         </button>
+
         <button
           className={`button btn text-${props.textMode}  btn-outline-secondary mx-1 my-1`}
           onClick={capitalize}
@@ -260,6 +316,7 @@ export default function Form(props) {
             Capitalize
           </small>
         </button>
+
         <button
           className={`button btn  text-${props.textMode}   btn-outline-secondary mx-1 my-1`}
           onClick={extraSpaces}
@@ -268,6 +325,7 @@ export default function Form(props) {
             Remove Extra Spaces
           </small>
         </button>
+
         <button
           className={`button btn text-${props.textMode} btn-outline-secondary  mx-1 my-1`}
           onClick={textClear}
@@ -275,6 +333,7 @@ export default function Form(props) {
             Clear
           </small>
         </button>
+        
         {/* <iframe src={`${listen}`} style={{ visibility: "hidden" }}></iframe> */}
       </div>
       <footer className={`text-${props.textMode} text-center`} style={foot1} >
