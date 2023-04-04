@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import "./Form.css"
+import ToggleButton from '@mui/material/ToggleButton';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 export default function Form(props) {
   //USeState Hooks
   const [text, setInput] = useState("");
@@ -7,6 +14,8 @@ export default function Form(props) {
   // const [listen, setListen] = useState(null);
   const [bold, setBold] = useState("normal");
   const [italic, setItalic] = useState("normal");
+  const [underline, setUnderline] = useState("");
+
 
   //Variables
   let count = (uText.split(" ").length - 1); // + (uText.split(".").length - 1)
@@ -179,6 +188,7 @@ export default function Form(props) {
   };
   //fucntion to Italicise the text
   function handleItalic() {
+
     if (text === "") {
       props.showAlert("warning", "! Please Enter Text To Italicise 🙄");
     } else {
@@ -187,6 +197,19 @@ export default function Form(props) {
         props.showAlert("success", "! Text Italicised");
       } else {
         setItalic("normal")
+      }
+    }
+  };
+  function handleUnderline() {
+
+    if (text === "") {
+      props.showAlert("warning", "! Please Enter Text To Italicise 🙄");
+    } else {
+      if (underline === "") {
+        setUnderline("underline")
+        props.showAlert("success", "! Text Italicised");
+      } else {
+        setUnderline("")
       }
     }
   };
@@ -220,7 +243,7 @@ export default function Form(props) {
           </p>
         </div>
 
-         <hr className={`border rounded border-${props.textMode}`} />
+        <hr className={`border rounded border-${props.textMode}`} />
 
         <div className={`   container`}>
           <h4 className={`text-center text-${props.textMode} `}>Preview  </h4>
@@ -233,7 +256,7 @@ export default function Form(props) {
             id="textBox"
             col="1"
             rows="8"
-            style={{ fontWeight: `${bold}`, fontStyle: `${italic}` }}
+            style={{ fontWeight: `${bold}`, fontStyle: `${italic}`, textDecoration: `${underline}` }}
           ></textarea>
         </div>
 
@@ -263,24 +286,6 @@ export default function Form(props) {
         >
           <small>
             SpellChecker
-          </small>
-        </button>
-
-        <button
-          className={`button btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
-          onClick={handleBold}
-        >
-          <small>
-            Bold
-          </small>
-        </button>
-
-        <button
-          className={`button btn  text-${props.textMode} btn-outline-secondary mx-1 my-1`}
-          onClick={handleItalic}
-        >
-          <small>
-            Italic
           </small>
         </button>
 
@@ -333,8 +338,27 @@ export default function Form(props) {
             Clear
           </small>
         </button>
-        
+
         {/* <iframe src={`${listen}`} style={{ visibility: "hidden" }}></iframe> */}
+      </div>
+      <div className="container" >
+
+        <ToggleButtonGroup aria-label="text formatting"  className="my-2 mx-2" style={{height:"40px",width: "20px"}}>
+          <ToggleButton value="bold" aria-label="bold" className={`border border-1 border-${props.textMode}`}>
+            <FormatItalicIcon onClick={handleItalic} style={{ color: `${props.iconColor}` }} className={`mx-1 my-1 `} />
+          </ToggleButton>
+          <ToggleButton value="italic" aria-label="italic" className={`border border-1 border-${props.textMode}`}>
+            <FormatBoldIcon onClick={handleBold} style={{ color: `${props.iconColor}` }} className={` mx-1 my-1`} />
+          </ToggleButton>
+          <ToggleButton value="underlined" aria-label="underlined" className={`border border-1 border-${props.textMode}`}>
+            <FormatUnderlinedIcon onClick={handleUnderline} style={{ color: `${props.iconColor}` }} className={`text-${props.textMode}mx-1 my-1`} />
+          </ToggleButton>
+          <ToggleButton value="color" aria-label="color" className={`border border-1 border-${props.textMode}`} >
+<FormatColorFillIcon style={{ color: `${props.iconColor}` }} className={`text-${props.textMode}mx-1 my-1`} />
+<ArrowDropDownIcon style={{ color: `${props.iconColor}` }} className={`text-${props.textMode}mx-1 my-1`} />
+</ToggleButton>
+
+        </ToggleButtonGroup>
       </div>
       <footer className={`text-${props.textMode} text-center`} style={foot1} >
         &copy;Copyright |{" "}

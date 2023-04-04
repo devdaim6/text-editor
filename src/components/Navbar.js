@@ -8,6 +8,7 @@ export default function Navbar(props) {
   const [navText, setNavText] = useState("Dark");
   const [bg, setBg] = useState("");
   const [alert, setAlert] = useState(null);
+  const [iconColor, setIconColor] = useState("");
 
   //On Switch Click
   const updateMode = () => {
@@ -17,6 +18,13 @@ export default function Navbar(props) {
     }
     else {
       document.getElementById("root").style.background = "#000000"
+    }
+
+    if (mode === "black") {
+      setIconColor("black")
+    }
+    if (mode === "white") {
+      setIconColor("white")
     }
 
     if (mode === "black") {
@@ -107,7 +115,7 @@ export default function Navbar(props) {
         <Alert alert={alert} />
       </div>
       <div className="container ">
-        <Form showAlert={showAlert} theme={modeText} bg={bg} textMode={modeText} />
+        <Form showAlert={showAlert} theme={modeText} bg={bg} iconColor={iconColor} textMode={modeText} />
       </div>
     </>
   );
