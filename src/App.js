@@ -4,11 +4,9 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Navbar from "./components/Navbar";
 function App() {
-
-
   return (
     <>
-      <Navbar title={"textEdits"} />
+       <Navbar/>
     </>
   );
 }

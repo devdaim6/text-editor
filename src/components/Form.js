@@ -6,7 +6,14 @@ import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
+import Divider from "@mui/material/Divider";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { styled } from "@mui/material/styles";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
+import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
+import ColorSelector from 'react-color-selector';
+
 export default function Form(props) {
   //USeState Hooks
   const [text, setInput] = useState("");
@@ -15,6 +22,56 @@ export default function Form(props) {
   const [bold, setBold] = useState("normal");
   const [italic, setItalic] = useState("normal");
   const [underline, setUnderline] = useState("");
+  const [alignment, setAlignment] = React.useState("left");
+  const [formats, setFormats] = React.useState(() => [""]);
+  const [myColor, pickedColor] = useState('');
+  const [colorPicker, setColorPicker] = useState('none');
+
+  const picker_data = {
+    col: 50,
+    row: 50,
+    width: 300,
+    height: 250,
+    view: 'both',
+    theme: 'dark',
+    title: 'COLORS',
+    cellControl: 4
+  }
+
+
+  const handleFormat = (event, newFormats) => {
+    setFormats(newFormats);
+  };
+
+  const handleToggle = () => {
+    if (colorPicker === "none")
+      setColorPicker("")
+    else
+      setColorPicker("none")
+  };
+
+  const handleAlignment = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
+
+
+
+  //for toggle buttons 
+  const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+    "& .MuiToggleButtonGroup-grouped": {
+      margin: theme.spacing(0.5),
+      border: 0,
+      "&.Mui-disabled": {
+        border: 0,
+      },
+      "&:not(:first-of-type)": {
+        borderRadius: theme.shape.borderRadius,
+      },
+      "&:first-of-type": {
+        borderRadius: theme.shape.borderRadius,
+      },
+    },
+  }));
 
 
   //Variables
@@ -35,6 +92,18 @@ export default function Form(props) {
 
   };
 
+  function handleLeftAlign() {
+    setFormats(["left"])
+
+  }
+  function handleCenterAlign() {
+    setFormats(["center"])
+
+  }
+  function handleRightAlign() {
+    setFormats(["right"])
+
+  }
   const changeText = (event) => {
 
     setText(event.target.value);
@@ -203,11 +272,11 @@ export default function Form(props) {
   function handleUnderline() {
 
     if (text === "") {
-      props.showAlert("warning", "! Please Enter Text To Italicise 🙄");
+      props.showAlert("warning", "! Please Enter Text To Undeline 🙄");
     } else {
       if (underline === "") {
         setUnderline("underline")
-        props.showAlert("success", "! Text Italicised");
+        props.showAlert("success", "! Text Underlined");
       } else {
         setUnderline("")
       }
@@ -248,7 +317,7 @@ export default function Form(props) {
         <div className={`   container`}>
           <h4 className={`text-center text-${props.textMode} `}>Preview  </h4>
           <textarea
-            className={`input form-control bg-${props.bg} border border-${props.textMode} text-${props.textMode} border-${props.textMode} my-3`}
+            className={`input form-control bg-${props.bg} border border-${props.textMode}border-${props.textMode} my-3`}
             readOnly
             placeholder="Read here"
             value={text}
@@ -256,7 +325,7 @@ export default function Form(props) {
             id="textBox"
             col="1"
             rows="8"
-            style={{ fontWeight: `${bold}`, fontStyle: `${italic}`, textDecoration: `${underline}` }}
+            style={{ fontWeight: `${bold}`, fontStyle: `${italic}`, textDecoration: `${underline}`, textAlign: `${formats}`, color: `${myColor}` }}
           ></textarea>
         </div>
 
@@ -343,22 +412,57 @@ export default function Form(props) {
       </div>
       <div className="container" >
 
-        <ToggleButtonGroup aria-label="text formatting"  className="my-2 mx-2" style={{height:"40px",width: "20px"}}>
-          <ToggleButton value="bold" aria-label="bold" className={`border border-1 border-${props.textMode}`}>
-            <FormatItalicIcon onClick={handleItalic} style={{ color: `${props.iconColor}` }} className={`mx-1 my-1 `} />
-          </ToggleButton>
-          <ToggleButton value="italic" aria-label="italic" className={`border border-1 border-${props.textMode}`}>
-            <FormatBoldIcon onClick={handleBold} style={{ color: `${props.iconColor}` }} className={` mx-1 my-1`} />
-          </ToggleButton>
-          <ToggleButton value="underlined" aria-label="underlined" className={`border border-1 border-${props.textMode}`}>
-            <FormatUnderlinedIcon onClick={handleUnderline} style={{ color: `${props.iconColor}` }} className={`text-${props.textMode}mx-1 my-1`} />
-          </ToggleButton>
-          <ToggleButton value="color" aria-label="color" className={`border border-1 border-${props.textMode}`} >
-<FormatColorFillIcon style={{ color: `${props.iconColor}` }} className={`text-${props.textMode}mx-1 my-1`} />
-<ArrowDropDownIcon style={{ color: `${props.iconColor}` }} className={`text-${props.textMode}mx-1 my-1`} />
-</ToggleButton>
 
-        </ToggleButtonGroup>
+        <div className="row  ">
+          <div className="d-flex">
+            <StyledToggleButtonGroup
+              size="small"
+              value={alignment}
+              exclusive
+              onChange={handleAlignment}
+              aria-label="text alignment"
+            >
+              <ToggleButton value="left" aria-label="left aligned">
+                <FormatAlignLeftIcon onClick={handleLeftAlign} />
+              </ToggleButton>
+              <ToggleButton value="center" aria-label="centered">
+                <FormatAlignCenterIcon onClick={handleCenterAlign} />
+              </ToggleButton>
+              <ToggleButton value="right" aria-label="right aligned">
+                <FormatAlignRightIcon onClick={handleRightAlign} />
+              </ToggleButton>
+            </StyledToggleButtonGroup>
+            <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
+            <StyledToggleButtonGroup
+              size="small"
+              value={formats}
+              onChange={handleFormat}
+              aria-label="text formatting"
+            >
+              <ToggleButton value="bold" aria-label="bold">
+                <FormatBoldIcon onClick={handleBold} />
+              </ToggleButton>
+              <ToggleButton value="italic" aria-label="italic">
+                <FormatItalicIcon onClick={handleItalic} />
+              </ToggleButton>
+              <ToggleButton value="underlined" aria-label="underlined">
+                <FormatUnderlinedIcon onClick={handleUnderline} />
+              </ToggleButton>
+            </StyledToggleButtonGroup>
+          </div>
+          <div className="d-flex justify-content-center">
+            <ToggleButton value="color" aria-label="color" style={{ width: "4rem" }} onClick={handleToggle}>
+              <FormatColorFillIcon style={{ color: `${myColor}` }} />
+              <ArrowDropDownIcon />
+              <ToggleButton style={{ display: `${colorPicker}` }} >
+                <ColorSelector pallet={picker_data} selectedColor={pickedColor} />
+              </ToggleButton>
+            </ToggleButton>
+          </div>
+        </div>
+
+
+
       </div>
       <footer className={`text-${props.textMode} text-center`} style={foot1} >
         &copy;Copyright |{" "}
